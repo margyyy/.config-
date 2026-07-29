@@ -1,0 +1,52 @@
+[terminal]
+shell = { program = "/usr/bin/zsh", args = ["-l"] }
+
+[window]
+padding = { x = 0, y = 0 }
+dimensions = { columns = 110, lines = 29}
+[font]
+normal = { family = "Adwaita Mono", style = "Regular" }
+bold = { family = "Adwaita Mono", style = "Bold" }
+italic = { family = "Adwaita Mono", style = "Italic" }
+bold_italic = { family = "Adwaita Mono", style = "Bold Italic" }
+size = 16
+
+[colors.primary]
+background = "#101010"
+foreground = "#c8c8c8"
+dim_foreground = "#888888"
+bright_foreground = "#eeeeee"
+
+[colors.cursor]
+text = "#101010"
+cursor = "#d8d8d8"
+
+[colors.selection]
+text = "#eeeeee"
+background = "#4a4a4a"
+
+[colors.normal]
+black = "#101010"
+red = "#c47c7c"
+green = "#9aae7b"
+yellow = "#c8ad6e"
+blue = "#7f95bd"
+magenta = "#b08ab6"
+cyan = "#82a8a8"
+white = "#c8c8c8"
+
+[colors.bright]
+black = "#505050"
+red = "#d89090"
+green = "#b0c58d"
+yellow = "#d9c078"
+blue = "#96abd2"
+magenta = "#c79bca"
+cyan = "#98c0c0"
+white = "#eeeeee"
+
+[mouse]
+bindings = [
+  { mouse = "WheelUp", mods = "Control", action = "IncreaseFontSize" },
+  { mouse = "WheelDown", mods = "Control", action = "DecreaseFontSize" },
+]

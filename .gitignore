@@ -1,0 +1,15 @@
+/*
+!/.gitignore
+
+!/sioyek/
+!/sioyek/**
+
+!/nvim/
+!/nvim/**
+
+!/alacritty/
+!/alacritty/**
+
+!/color-scheme/
+!/color-scheme/**
+

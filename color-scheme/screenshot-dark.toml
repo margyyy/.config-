@@ -1,0 +1,40 @@
+[metadata]
+name = "screenshot-dark"
+description = "Palette scura ricavata dagli screenshot del terminale."
+
+[palette]
+background = "#101010"
+background_alt = "#181818"
+background_soft = "#202020"
+foreground = "#c8c8c8"
+foreground_dim = "#888888"
+foreground_bright = "#eeeeee"
+grey = "#505050"
+red = "#c47c7c"
+green = "#9aae7b"
+yellow = "#c8ad6e"
+blue = "#7f95bd"
+magenta = "#b08ab6"
+cyan = "#82a8a8"
+orange = "#d09a6a"
+selection = "#4a4a4a"
+
+[ansi.normal]
+black = "#101010"
+red = "#c47c7c"
+green = "#9aae7b"
+yellow = "#c8ad6e"
+blue = "#7f95bd"
+magenta = "#b08ab6"
+cyan = "#82a8a8"
+white = "#c8c8c8"
+
+[ansi.bright]
+black = "#505050"
+red = "#d89090"
+green = "#b0c58d"
+yellow = "#d9c078"
+blue = "#96abd2"
+magenta = "#c79bca"
+cyan = "#98c0c0"
+white = "#eeeeee"
