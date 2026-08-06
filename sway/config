@@ -1,0 +1,192 @@
+# Configurazione Sway con scorciatoie allineate a Niri.
+
+set $mod Mod4
+set $term alacritty
+set $menu fuzzel
+set $files nautilus
+
+# Sfondo per tutti gli schermi.
+output * bg /home/daniel/Downloads/moon.jpg fill
+
+font pango:Sans 9
+floating_modifier $mod normal
+
+# Decorazioni native Sway: barra del titolo, bordi visibili e angoli quadrati.
+# "normal" mantiene la titlebar di Sway; non usare "pixel" o "none".
+default_border normal 2
+default_floating_border normal 2
+for_window [shell="xdg_shell"] border normal 2
+titlebar_padding 4 2
+
+# SwayFX: blur soltanto su Alacritty, con trasparenza leggera.
+blur disable
+blur_radius 5
+blur_passes 2
+for_window [app_id="Alacritty"] opacity 0.92
+for_window [app_id="Alacritty"] blur enable
+for_window [app_id="org.gnome.Nautilus"] opacity 0.92
+for_window [app_id="org.gnome.Nautilus"] blur enable
+
+# Blur sulla barra nativa; l'alpha dello sfondo è impostato nel blocco bar.
+layer_effects "panel" {
+    blur enable
+    blur_xray disable
+    blur_ignore_transparent enable
+}
+
+# Viola Gentoo solo sulla finestra attiva; le altre restano neutre.
+# Ordine: bordo, sfondo titlebar, testo, indicatore, bordo figlio.
+client.focused          #DDDAEC #DDDAEC #191724 #DDDAEC #DDDAEC
+client.focused_inactive #4c566a #4c566a #e5e9f0 #4c566a #4c566a
+client.unfocused        #3b4252 #3b4252 #d8dee9 #3b4252 #3b4252
+client.urgent           #3b4252 #3b4252 #ffffff #3b4252 #3b4252
+client.placeholder      #2e3440 #2e3440 #d8dee9 #2e3440 #2e3440
+
+input type:keyboard {
+    xkb_layout it
+}
+
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+### Applicazioni (come in Niri, con launcher adatto a Sway)
+bindsym $mod+q exec $term
+bindsym $mod+t exec $term
+bindsym $mod+r exec $menu
+bindsym $mod+d exec $menu
+bindsym $mod+e exec $files
+bindsym $mod+w kill
+bindsym Mod4+Mod1+l exec swaylock -f -c 111318
+
+### Screenshot: area e schermo intero (copiati negli appunti)
+bindsym $mod+s exec grim -g "$(slurp)" - | wl-copy
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
+bindsym Ctrl+Print exec grim - | wl-copy
+bindsym Alt+Print exec grim - | wl-copy
+
+### Focus, uguale a Niri
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+### Spostamento finestre, in Niri e qui con Ctrl
+bindsym $mod+Ctrl+Left move left
+bindsym $mod+Ctrl+Down move down
+bindsym $mod+Ctrl+Up move up
+bindsym $mod+Ctrl+Right move right
+bindsym $mod+Ctrl+h move left
+bindsym $mod+Ctrl+j move down
+bindsym $mod+Ctrl+k move up
+bindsym $mod+Ctrl+l move right
+
+bindsym $mod+Home focus child
+bindsym $mod+End focus parent
+
+### Workspace
+bindsym $mod+Page_Down workspace next
+bindsym $mod+Page_Up workspace prev
+bindsym $mod+u workspace next
+bindsym $mod+i workspace prev
+bindsym $mod+Ctrl+Page_Down move container to workspace next; workspace next
+bindsym $mod+Ctrl+Page_Up move container to workspace prev; workspace prev
+bindsym $mod+Ctrl+u move container to workspace next; workspace next
+bindsym $mod+Ctrl+i move container to workspace prev; workspace prev
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+bindsym $mod+Ctrl+1 move container to workspace number 1
+bindsym $mod+Ctrl+2 move container to workspace number 2
+bindsym $mod+Ctrl+3 move container to workspace number 3
+bindsym $mod+Ctrl+4 move container to workspace number 4
+bindsym $mod+Ctrl+5 move container to workspace number 5
+bindsym $mod+Ctrl+6 move container to workspace number 6
+bindsym $mod+Ctrl+7 move container to workspace number 7
+bindsym $mod+Ctrl+8 move container to workspace number 8
+bindsym $mod+Ctrl+9 move container to workspace number 9
+
+### Layout e dimensioni: equivalenti Sway dei comandi Niri
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle global
+bindsym $mod+v floating toggle
+bindsym $mod+Shift+v focus mode_toggle
+bindsym $mod+Ctrl+w layout toggle tabbed split
+bindsym $mod+bracketleft splith
+bindsym $mod+bracketright splitv
+bindsym $mod+minus resize shrink width 10 ppt
+bindsym $mod+equal resize grow width 10 ppt
+bindsym $mod+Shift+minus resize shrink height 10 ppt
+bindsym $mod+Shift+equal resize grow height 10 ppt
+
+mode "resize" {
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+r mode "resize"
+
+### Audio, luminosita e media (PipeWire/WirePlumber)
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-
+bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioStop exec playerctl stop
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86MonBrightnessUp exec brightnessctl --class=backlight set +10%
+bindsym --locked XF86MonBrightnessDown exec brightnessctl --class=backlight set 10%-
+
+### Sessione Sway
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+p output * power toggle
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Uscire da Sway?' -B 'Si, esci' 'swaymsg exit'
+bindsym Ctrl+Alt+Delete exec swaynag -t warning -m 'Uscire da Sway?' -B 'Si, esci' 'swaymsg exit'
+
+# Barra e componenti specifici di Sway forniti dal sistema.
+bar {
+    swaybar_command swaybar
+    position bottom
+    status_command /home/daniel/.config/sway/status.sh
+    font pango:JetBrainsMono Nerd Font Mono 9
+    separator_symbol ""
+    status_padding 2
+    status_edge_padding 4
+
+    # Rosé Pine; il workspace selezionato usa Gentoo grey.
+    colors {
+        background         #191724CC
+        statusline         #e0def4
+        separator          #191724
+        focused_workspace  #DDDAEC #DDDAEC #191724
+        active_workspace   #31748f #31748f #e0def4
+        inactive_workspace #26233a #26233a #908caa
+        urgent_workspace   #eb6f92 #eb6f92 #191724
+        binding_mode       #f6c177 #f6c177 #191724
+    }
+}
+
+# Mantiene l'integrazione NixOS/systemd senza caricare waybar.conf.
+include /etc/sway/config.d/nixos.conf
