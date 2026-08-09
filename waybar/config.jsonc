@@ -1,0 +1,164 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 24,
+    "spacing": 4,
+    "fixed-center": true,
+    "exclusive": true,
+    "reload_style_on_change": true,
+
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "network#ipv4",
+        "group/performance",
+        "backlight",
+        "wireplumber",
+        "bluetooth",
+        "network",
+        "battery",
+        "clock",
+        "tray"
+    ],
+
+    "group/performance": {
+        "orientation": "horizontal",
+        "modules": [
+            "cpu",
+            "memory",
+            "custom/cpu-temperature"
+        ]
+    },
+
+    "sway/workspaces": {
+        "format": "{name}",
+        "all-outputs": false,
+        "disable-scroll": false,
+        "disable-scroll-wraparound": true,
+        "warp-on-scroll": false
+    },
+
+    "sway/mode": {
+        "format": "<i>{}</i>"
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "CPU {usage}%",
+        "tooltip": false
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": "RAM {percentage}%",
+        "tooltip": false
+    },
+
+    "custom/cpu-temperature": {
+        "exec": "/home/daniel/.config/waybar/scripts/cpu-temperature.sh",
+        "interval": 10,
+        "format": "TMP {}°C",
+        "tooltip": false
+    },
+
+    "bluetooth": {
+        "format": "<span size=\"large\" rise=\"-1000\"></span>",
+        "format-disabled": "<span size=\"large\" rise=\"-1000\" alpha=\"55%\"></span>",
+        "format-off": "<span size=\"large\" rise=\"-1000\" alpha=\"55%\"></span>",
+        "format-on": "<span size=\"large\" rise=\"-1000\"></span>",
+        "format-connected": "<span size=\"large\" rise=\"-1000\"></span>",
+        "format-no-controller": "",
+        "on-click": "blueman-manager",
+        "tooltip-format": "Bluetooth: {status}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}"
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "<span size=\"large\" rise=\"-1000\">{icon}</span>",
+        "format-ethernet": "<span size=\"large\" rise=\"-1000\">󰈀</span>",
+        "format-linked": "<span size=\"large\" rise=\"-1000\" alpha=\"55%\"></span>",
+        "format-disconnected": "<span size=\"large\" rise=\"-1000\" alpha=\"55%\">󰤮</span>",
+        "format-disabled": "<span size=\"large\" rise=\"-1000\" alpha=\"55%\">󰤮</span>",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%",
+        "tooltip-format-ethernet": "Ethernet: {ifname}",
+        "tooltip-format-disconnected": "Network disconnected",
+        "on-click": "alacritty -e nmtui-connect"
+    },
+
+    "network#ipv4": {
+        "family": "ipv4",
+        "interval": 5,
+        "format": "<span foreground=\"#9aae7b\">IPv4 {ipaddr}</span>",
+        "format-wifi": "<span foreground=\"#9aae7b\">IPv4 {ipaddr}</span>",
+        "format-ethernet": "<span foreground=\"#9aae7b\">IPv4 {ipaddr}</span>",
+        "format-linked": "",
+        "format-disconnected": "",
+        "format-disabled": "",
+        "tooltip": false
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "interval": 2,
+        "format": "<span size=\"large\" rise=\"-1000\">{icon}</span> {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip": false
+    },
+
+    "wireplumber": {
+        "format": "<span size=\"large\" rise=\"-1000\">{icon}</span> {volume}%",
+        "format-muted": "<span size=\"large\" rise=\"-1000\">󰝟</span> mute",
+        "format-icons": ["", "", ""],
+        "scroll-step": 2,
+        "max-volume": 100,
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "tooltip": false
+    },
+
+    "battery": {
+        "bat": "BAT0",
+        "adapter": "ADP1",
+        "interval": 2,
+        "states": {
+            "warning": 25,
+            "critical": 12
+        },
+        "format": "<span size=\"large\" rise=\"-1000\">{icon}</span> {capacity}%",
+        "format-alt": "<span size=\"large\" rise=\"-1000\">{icon}</span> {power} W",
+        "format-charging": "<span size=\"large\" rise=\"-1000\">{icon}</span> {capacity}%",
+        "format-plugged": "<span size=\"large\" rise=\"-1000\">{icon}</span> {capacity}%",
+        "format-full": "<span size=\"large\" rise=\"-1000\">{icon}</span> {capacity}%",
+        "format-icons": ["󰁺", "󰁽", "󰁿", "󰂁", "󰁹"],
+        "tooltip-format": "Battery: {capacity}%\nPower: {power} W\nRemaining: {time}"
+    },
+
+    "clock": {
+        "interval": 1,
+        "locale": "C",
+        "format": "{:%a %d %b %H:%M:%S}",
+        "on-click": "/home/daniel/.config/waybar/scripts/calendar-toggle.sh",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "right",
+            "iso8601": true,
+            "format": {
+                "months": "<b>{}</b>",
+                "weekdays": "<b>{}</b>",
+                "today": "<b><u>{}</u></b>"
+            }
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    }
+}

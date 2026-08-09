@@ -1,0 +1,145 @@
+@define-color base #101010;
+@define-color surface #181818;
+@define-color muted #505050;
+@define-color text #c8c8c8;
+@define-color subtle #888888;
+@define-color gentoo #eeeeee;
+@define-color rose #c47c7c;
+@define-color gold #c8ad6e;
+
+* {
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font Mono", monospace;
+    font-size: 11px;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+window#waybar {
+    background: @base;
+    color: @text;
+}
+
+#workspaces button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0;
+    background: transparent;
+    color: @subtle;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: @text;
+}
+
+#workspaces button.focused,
+#workspaces button.visible {
+    background: @gentoo;
+    color: @base;
+}
+
+#workspaces button.urgent {
+    background: transparent;
+    color: @rose;
+}
+
+#mode {
+    padding: 0 7px;
+    background: transparent;
+    color: @gold;
+}
+
+#performance {
+    background: @gentoo;
+    color: @base;
+}
+
+#cpu {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+#memory {
+    padding-left: 0;
+    padding-right: 6px;
+}
+
+#custom-cpu-temperature {
+    padding-left: 0;
+    padding-right: 6px;
+}
+
+#bluetooth,
+#network,
+#backlight,
+#wireplumber,
+#battery {
+    padding: 0 8px;
+}
+
+#clock {
+    padding: 0 5px;
+}
+
+#tray {
+    padding: 0 8px 0 5px;
+}
+
+#backlight {
+    padding-right: 2px;
+}
+
+#wireplumber {
+    padding-left: 2px;
+}
+
+#cpu,
+#memory,
+#custom-cpu-temperature,
+#bluetooth,
+#network,
+#backlight,
+#wireplumber,
+#battery,
+#clock,
+#tray {
+    font-size: 12px;
+}
+
+#bluetooth,
+#network {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#network.ipv4 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#battery.warning {
+    color: @gold;
+}
+
+#battery.critical:not(.charging) {
+    color: @rose;
+}
+
+#clock {
+    background: transparent;
+    color: @text;
+    font-weight: bold;
+}
+
+tooltip {
+    background: @base;
+    color: @text;
+    border: 1px solid @muted;
+}
+
+tooltip label {
+    padding: 5px;
+}

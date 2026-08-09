@@ -15,3 +15,6 @@
 
 !/sway/
 !/sway**
+
+!/waybar/
+!/waybar**
